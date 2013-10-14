@@ -29,32 +29,38 @@ $mobilant->send();
 
 Every setter returns the object again to enable chaining and has a respective getter
 
-* setKey
-> Your app API key
+**setKey**
+Your app API key
 
-* setMessage
-> The message of the sms
+**setMessage**
+The message of the sms
 
-* setTo
-> The receiver's phone number
+**setTo**
+The receiver's phone number
 
-* setFrom
-> The sender name
+**setFrom**
+The sender name
 
-* setRoute
-> The route to choose
+**setRoute**
+The route to choose
 
-* setRef
-> The reference to save with the message
+**setRef**
+The reference to save with the message
 
-* setConcat
-> If the message should be concatenated when > 160 chars
+**setConcat**
+If the message should be concatenated when > 160 chars
 
-* setSenddate
-> The date to send if you want to time it for later
+**setSenddate**
+The date to send if you want to time it for later
 
-* setDebug
-> If you want to act as if you'd drop a message but don't want it to be sent
+**setDebug**
+If you want to act as if you'd drop a message but don't want it to be sent
 
-* send
-> Send the text message
+**send**
+Send the text message
+
+*Returns* array with two indexes:
+
+'success' => true if the message was sent successfully, otherwise false
+
+'response' => An array with the data returned by the mobilant api if the message was sent successfully, otherwise null. Indexes are responsecode, message_id, cost, count
