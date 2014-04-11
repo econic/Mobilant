@@ -1,0 +1,12 @@
+{
+	"name": "econic/mobilant",
+	"description": "Utility class for the mobilant sms service",
+	"keywords": ["sms","mobilant","utility"],
+	"homepage": "https://github.com/econic/Mobilant.git",
+	"license": "MIT",
+	"autoload": {
+		"psr-0": {
+			"Econic\\Mobilant": "Classes"
+		}
+	}
+}
