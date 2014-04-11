@@ -1,13 +1,12 @@
 ## About
 > [Mobilant](http://mobilant.de/) is an ideal platform for sending sms, using this very simple API.
 
-## mobilant class
-The mobilant class is a PHP class for using the [Mobilant](http://mobilant.de/) REST API. Have a look at their API docs for more details about all the parameters.
+This is a composer package for using the [Mobilant](http://mobilant.de/) REST API. Have a look at their API docs for more details about all the parameters.
 
 ## minimum configuration
 Fastest possible usage for PHP 5.4+ using chaining for a [fluent interface](http://en.wikipedia.org/wiki/Fluent_interface)
 ```php
-(new Mobilant)
+(new \Econic\Mobilant\SMS)
 	->setKey('myTokenKey123')
 	->setMessage('hello world')
 	->setTo('0049987123456')
@@ -17,7 +16,7 @@ Fastest possible usage for PHP 5.4+ using chaining for a [fluent interface](http
 ```
 Fastest possible usage for < PHP 5.4 and without using chaining
 ```php
-$mobilant = new Mobilant();
+$mobilant = new \Econic\Mobilant\SMS();
 $mobilant->setKey('myTokenKey123');
 $mobilant->setMessage('hello world');
 $mobilant->setTo('0049987123456');

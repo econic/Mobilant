@@ -1,14 +1,15 @@
 <?php
+namespace Econic\Mobilant;
 /**
  * PHP class for the mobilant.de services
  * API: http://mobilant.de/
  * 
- * @author Aimo Künkel <mail@aimo.cc>
+ * @author Aimo Künkel
  * @package mobilant
  * @license MIT License
  */ 
 
-class Mobilant {
+class SMS {
 	// api url
 	const API_URL = 'https://gw.mobilant.net';
 
