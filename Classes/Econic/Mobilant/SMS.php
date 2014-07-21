@@ -7,7 +7,7 @@ namespace Econic\Mobilant;
  * @author Aimo Künkel
  * @package mobilant
  * @license MIT License
- */ 
+ */
 
 class SMS {
 	// api url
@@ -47,6 +47,13 @@ class SMS {
 	 * @var string
 	 */
 	protected $route;
+
+	/**
+	 * The encoding of the string you pass into setMessage() and setFrom()
+	 * 
+	 * @var string
+	 */
+	protected $charset;
 
 	/**
 	 * reference of the sms, if you wish to add one
@@ -177,6 +184,26 @@ class SMS {
 	}
 	
 	/**
+	 * Gets the charset
+	 *
+	 * @return string
+	 */
+	public function getCharset() {
+		return $this->charset;
+	}
+	
+	/**
+	 * Sets the charset
+	 *
+	 * @param string $charset value to set
+	 * @return this
+	 */
+	public function setCharset($charset) {
+		$this->charset = (string)$charset;
+		return $this;
+	}
+	
+	/**
 	 * Gets the ref
 	 *
 	 * @return string
@@ -292,6 +319,7 @@ class SMS {
 			// optional params
 			'debug' => $this->getDebug() ? 1 : 0,
 			'concat' => $this->getConcat() ? 1 : 0,
+			'charset' => $this->getCharset(),
 			'senddate' => $this->getSenddate(),
 			'ref' => $this->getRef(),
 

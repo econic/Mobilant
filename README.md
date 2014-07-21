@@ -43,6 +43,9 @@ The sender name
 **setRoute**
 The route to choose
 
+**setCharset**
+The encoding of the string you pass into `setMessage()` and `setFrom()`
+
 **setRef**
 The reference to save with the message
 
