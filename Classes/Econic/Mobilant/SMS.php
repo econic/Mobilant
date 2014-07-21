@@ -306,7 +306,7 @@ class SMS {
 		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 		// curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-		// disable expect header "100 continue" to prefent HTTP 417 Statuscode
+		// disable expect header "100 continue" to prevent HTTP 417 Statuscode
 		curl_setopt($ch, CURLOPT_HTTPHEADER, array('Expect:'));
 		curl_setopt($ch, CURLOPT_POSTFIELDS, array(
 			// required params
