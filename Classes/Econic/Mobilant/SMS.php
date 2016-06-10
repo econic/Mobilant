@@ -1,84 +1,85 @@
 <?php
 namespace Econic\Mobilant;
+
 /**
  * PHP class for the mobilant.de services
  * API: http://mobilant.de/
- * 
+ *
  * @author Aimo Künkel
  * @package mobilant
  * @license MIT License
  */
-
 class SMS {
+
 	// api url
-	const API_URL = 'https://gw.mobilant.net';
+	const API_URL = 'https://gw.mobilant.net/';
 
 	/**
 	 * Identification Key
-	 * 
+	 *
 	 * @var string
 	 */
 	protected $key;
 
 	/**
 	 * text of the message
-	 * 
+	 *
 	 * @var string
 	 */
 	protected $message;
 
 	/**
 	 * phone number of the receiver
-	 * 
+	 *
 	 * @var string
 	 */
 	protected $to;
 
 	/**
 	 * sender name
-	 * 
+	 *
 	 * @var string
 	 */
 	protected $from;
 
 	/**
 	 * the route to send the sms with, check available options on mobilant.com
-	 * 
+	 *
 	 * @var string
 	 */
 	protected $route;
 
 	/**
 	 * The encoding of the string you pass into setMessage() and setFrom()
-	 * 
+	 *
 	 * @var string
 	 */
 	protected $charset;
 
 	/**
 	 * reference of the sms, if you wish to add one
-	 * 
+	 *
 	 * @var string
 	 */
 	protected $ref;
 
 	/**
 	 * concat, tells if messages > 160 chars should be splitted or concatenated
-	 * 
+	 *
 	 * @var boolean
 	 */
 	protected $concat;
 
 	/**
 	 * senddate if you wish to time the sms
-	 * 
+	 *
 	 * @var integer
 	 */
 	protected $senddate;
 
 	/**
 	 * send debugging sms
-	 * 
+	 *
 	 * @var boolean
 	 */
 	protected $debug;
@@ -91,7 +92,7 @@ class SMS {
 	public function getKey() {
 		return $this->key;
 	}
-	
+
 	/**
 	 * Sets the key
 	 *
@@ -102,7 +103,7 @@ class SMS {
 		$this->key = (string)$key;
 		return $this;
 	}
-	
+
 	/**
 	 * Gets the message
 	 *
@@ -111,7 +112,7 @@ class SMS {
 	public function getMessage() {
 		return $this->message;
 	}
-	
+
 	/**
 	 * Sets the message
 	 *
@@ -122,7 +123,7 @@ class SMS {
 		$this->message = (string)$message;
 		return $this;
 	}
-	
+
 	/**
 	 * Gets the to
 	 *
@@ -131,7 +132,7 @@ class SMS {
 	public function getTo() {
 		return $this->to;
 	}
-	
+
 	/**
 	 * Sets the to
 	 *
@@ -142,7 +143,7 @@ class SMS {
 		$this->to = (string)$to;
 		return $this;
 	}
-	
+
 	/**
 	 * Gets the from
 	 *
@@ -151,7 +152,7 @@ class SMS {
 	public function getFrom() {
 		return $this->from;
 	}
-	
+
 	/**
 	 * Sets the from
 	 *
@@ -162,7 +163,7 @@ class SMS {
 		$this->from = (string)$from;
 		return $this;
 	}
-	
+
 	/**
 	 * Gets the route
 	 *
@@ -171,7 +172,7 @@ class SMS {
 	public function getRoute() {
 		return $this->route;
 	}
-	
+
 	/**
 	 * Sets the route
 	 *
@@ -182,7 +183,7 @@ class SMS {
 		$this->route = (string)$route;
 		return $this;
 	}
-	
+
 	/**
 	 * Gets the charset
 	 *
@@ -191,7 +192,7 @@ class SMS {
 	public function getCharset() {
 		return $this->charset;
 	}
-	
+
 	/**
 	 * Sets the charset
 	 *
@@ -202,7 +203,7 @@ class SMS {
 		$this->charset = (string)$charset;
 		return $this;
 	}
-	
+
 	/**
 	 * Gets the ref
 	 *
@@ -211,7 +212,7 @@ class SMS {
 	public function getRef() {
 		return $this->ref;
 	}
-	
+
 	/**
 	 * Sets the ref
 	 *
@@ -222,7 +223,7 @@ class SMS {
 		$this->ref = (string)$ref;
 		return $this;
 	}
-	
+
 	/**
 	 * Gets the concat
 	 *
@@ -231,7 +232,7 @@ class SMS {
 	public function getConcat() {
 		return $this->concat;
 	}
-	
+
 	/**
 	 * Sets the concat
 	 *
@@ -242,7 +243,7 @@ class SMS {
 		$this->concat = (boolean)$concat;
 		return $this;
 	}
-	
+
 	/**
 	 * Gets the senddate
 	 *
@@ -251,7 +252,7 @@ class SMS {
 	public function getSenddate() {
 		return $this->senddate;
 	}
-	
+
 	/**
 	 * Sets the senddate
 	 *
@@ -262,7 +263,7 @@ class SMS {
 		$this->senddate = (integer)$senddate;
 		return $this;
 	}
-	
+
 	/**
 	 * Gets the debug
 	 *
@@ -271,7 +272,7 @@ class SMS {
 	public function getDebug() {
 		return $this->debug;
 	}
-	
+
 	/**
 	 * Sets the debug
 	 *
@@ -284,31 +285,99 @@ class SMS {
 	}
 
 	/**
-	 * sends the sms and returns the status
-	 * 
-	 * @return array
+	 * Sends the SMS and returns the response
+	 *
+	 * @return array|null
 	 */
 	public function send() {
-		if (
-			!$this->getKey() ||
-			!$this->getMessage() ||
-			!$this->getTo() ||
-			!$this->getFrom() ||
-			!$this->getRoute() ) {
-			return array(
-				'success' => false
-			);
+		// Try running the request, up to five times
+		for ($i = 0; $i < 5; $i++) {
+			$response = $this->request();
+
+			if ($response['success']) {
+				$response['retry_count'] = $i;
+
+				return $response;
+			}
 		}
 
+		return null;
+	}
+
+	/**
+	 * Send the request to the Mobilant gateway
+	 *
+	 * @return array[status:int, success:boolean, ...]
+	 */
+	protected function request() {
+		// Build the POST data array
+		$data = $this->buildPostData();
+
+		if (!is_array($data)) {
+			return [
+				'status' => -1,
+				'success' => false,
+				'error' => 'Could not build valid POST data array!'
+			];
+		}
+
+		$data['message_id'] = '1';
+		$data['cost'] = '1';
+		$data['count'] = '1';
+
+		// Create cURL instance and set options
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_URL, self::API_URL);
+		curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 3);
+		curl_setopt($ch, CURLOPT_TIMEOUT, 5);
 		curl_setopt($ch, CURLOPT_HEADER, false);
-		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-		// curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-		// disable expect header "100 continue" to prevent HTTP 417 Statuscode
-		curl_setopt($ch, CURLOPT_HTTPHEADER, array('Expect:'));
-		curl_setopt($ch, CURLOPT_POSTFIELDS, array(
+		curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+		curl_setopt($ch, CURLOPT_HTTPHEADER, ['Expect:']); // disable expect header "100 continue" to prevent HTTP 417 Statuscode
+
+		// Send the request and terminate cURL instance
+		$response = curl_exec($ch);
+		$err = curl_error($ch);
+		curl_close($ch);
+
+		// Did everything go well?
+		if (is_string($response) && empty($err)) {
+			$response = explode("\n", $response);
+			$status = (int)($response[0] ?? 0);
+
+			return [
+				'status' => $status,
+				'success' => ($status === 100 ? true : false),
+				'message_id' => ($response[1] ?? ''),
+				'cost' => ($response[2] ?? ''),
+				'count' => ($response[3] ?? '')
+			];
+		} else {
+			return [
+				'status' => 0,
+				'success' => false,
+				'error' => $err
+			];
+		}
+	}
+
+	/**
+	 * Builds an array that contains all values for the POST body
+	 *
+	 * @return array|null
+	 */
+	protected function buildPostData() {
+		if (
+			!$this->getKey()     ||
+			!$this->getMessage() ||
+			!$this->getTo()      ||
+			!$this->getFrom()    ||
+			!$this->getRoute()
+		) {
+			return null;
+		}
+
+		return [
 			// required params
 			'key' => $this->getKey(),
 			'message' => $this->getMessage(),
@@ -319,28 +388,10 @@ class SMS {
 			// optional params
 			'debug' => $this->getDebug() ? 1 : 0,
 			'concat' => $this->getConcat() ? 1 : 0,
-			'charset' => $this->getCharset(),
+			'charset' => $this->getCharset() ?? mb_internal_encoding(),
 			'senddate' => $this->getSenddate(),
-			'ref' => $this->getRef(),
-
-			// output values
-			'message_id' => '1',
-			'cost' => '1',
-			'count' => '1'
-		));
-		$response = explode("\n", curl_exec($ch));
-		curl_close($ch);
-		
-		return array(
-			'success' => $response[0] == 100 ? true : false,
-			'response' => array(
-				'responsecode' => $response[0],
-				'message_id' => $response[1],
-				'cost' => $response[2],
-				'count' => $response[3]
-			)
-		);
+			'ref' => $this->getRef()
+		];
 	}
 
 }
-?>
